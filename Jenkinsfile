@@ -1,24 +1,23 @@
 pipeline {
-
     agent any
 
     stages {
 
         stage('Checkout') {
             steps {
-                echo "Checking out source..."
+                checkout scm
             }
         }
 
-        stage('Run Python') {
+        stage('Verify Python') {
+            steps {
+                sh 'python3 --version'
+            }
+        }
+
+        stage('Run Python Application') {
             steps {
                 sh 'python3 app.py'
-            }
-        }
-
-        stage('Complete') {
-            steps {
-                echo "Python build completed successfully."
             }
         }
     }
